@@ -29,6 +29,11 @@ const loggerRoutes = require('./routes/logger/logger');  // Rutas del taller
 const mysqlRoutes = require('./routes/mysql/mysql'); // Rutas de MySQL
 const tareasjwtRoutes = require('./routes/tareas/tareasjwt');  // Rutas del taller
 
+//Rutas de workshop
+
+const paisRoutes = require('./routes/pais/paisRoutes'); // Rutas del desafío de países
+
+
 /**
  * @file Archivo principal de la aplicación.
  * Este archivo inicializa la aplicación Express, configura las rutas, la documentación
@@ -90,7 +95,10 @@ app.use('/api', tareasRoutes);
 app.use('/api', adminRoutes); 
 app.use('/api', loggerRoutes); 
 app.use('/api', mysqlRoutes); 
-app.use('/api', tareasjwtRoutes); 
+app.use('/api', tareasjwtRoutes);
+
+//desafio
+app.use('/api/pais', paisRoutes);
 
 logger.info('🌐 Rutas de la API configuradas en /api');
 
