@@ -43,8 +43,18 @@ exports.obtenerPais = async (nombre) => {
             idiomas: Object.values(pais.languages || []),
             poblacion: pais.population || 0
         };
-    } catch (error) {
-        logger.error(`❌ Error al obtener país "${nombre}": ${error.message}`);
+     } catch (error) {
+        // Si es un error manejado por axios con respuesta HTTP
+        if (error.response) {
+            if (error.response.status === 404) {
+                logger.warn(`⚠️ País no encontrado: ${nombre}`);
+                throw new Error('País no encontrado');
+            }
+            logger.error(`❌ Error HTTP al obtener país "${nombre}": ${error.response.status}`);
+        } else {
+            logger.error(`❌ Error sin respuesta al obtener país "${nombre}": ${error.message}`);
+        }
+
         throw new Error('Error al consultar la API de países');
     }
 };

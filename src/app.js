@@ -64,7 +64,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Middleware para sanitizar datos de entrada
-app.use(xss());
+if (process.env.NODE_ENV !== 'development') {
+  app.use(xss());
+}
 
 // Middleware para analizar JSON
 app.use(bodyParser.json());

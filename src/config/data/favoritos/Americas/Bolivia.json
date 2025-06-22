@@ -1,0 +1,13 @@
+{
+  "nombre": "Bolivia",
+  "capital": "Sucre",
+  "region": "Americas",
+  "moneda": "BOB",
+  "idiomas": [
+    "Aymara",
+    "Guaraní",
+    "Quechua",
+    "Spanish"
+  ],
+  "poblacion": 11673029
+}

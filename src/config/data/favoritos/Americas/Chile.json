@@ -1,0 +1,10 @@
+{
+  "nombre": "Chile",
+  "capital": "Santiago",
+  "region": "Americas",
+  "moneda": "CLP",
+  "idiomas": [
+    "Spanish"
+  ],
+  "poblacion": 19116209
+}
