@@ -11,8 +11,17 @@ const leerListaNegra = () => JSON.parse(fs.readFileSync(LISTA_NEGRA_PATH, 'utf8'
  * Guarda un país en favoritos si no está en la lista negra y no es duplicado.
  */
 exports.agregarFavorito = async (nombre) => {
-  const pais = await paisRepository.obtenerPais(nombre); // Lanza error si no existe
-  const region = pais.region || 'Sin Región';
+let pais;
+  try {
+    pais = await paisRepository.obtenerPais(nombre);
+  } catch (error) {
+    if (error.message.includes('País no encontrado')) {
+      const err = new Error('País no encontrado');
+      err.status = 404;
+      throw err;
+    }
+    throw error; // Otros errores inesperados
+  }  const region = pais.region || 'Sin Región';
 
   const listaNegra = leerListaNegra();
   if (listaNegra.includes(pais.nombre)) {

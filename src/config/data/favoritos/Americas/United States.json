@@ -1,0 +1,10 @@
+{
+  "nombre": "United States",
+  "capital": "Washington, D.C.",
+  "region": "Americas",
+  "moneda": "USD",
+  "idiomas": [
+    "English"
+  ],
+  "poblacion": 329484123
+}

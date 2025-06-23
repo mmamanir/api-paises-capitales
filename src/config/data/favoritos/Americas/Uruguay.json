@@ -1,0 +1,10 @@
+{
+  "nombre": "Uruguay",
+  "capital": "Montevideo",
+  "region": "Americas",
+  "moneda": "UYU",
+  "idiomas": [
+    "Spanish"
+  ],
+  "poblacion": 3473727
+}

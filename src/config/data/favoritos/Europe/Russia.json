@@ -1,0 +1,10 @@
+{
+  "nombre": "Russia",
+  "capital": "Moscow",
+  "region": "Europe",
+  "moneda": "RUB",
+  "idiomas": [
+    "Russian"
+  ],
+  "poblacion": 144104080
+}

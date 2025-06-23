@@ -4,16 +4,13 @@ const router = express.Router();
 const paisController = require('../../controllers/pais/paisController');
 const bloquearListaNegra = require('../../middleware/bloquearListaNegra');
 
-// const authMiddleware = require('../../middleware/authJwt'); // Si deseas proteger rutas
-
 /**
  * @file Rutas relacionadas con la gestión de países.
  * Este archivo define las rutas para interactuar con la API de REST Countries,
- * gestionar países favoritos, y aplicar validaciones.
+ * gestionar países favoritos, bloquear países restringidos, y generar ranking de búsquedas.
  *
  * @module routes/paisRoutes
  */
-
 
 /**
  * @swagger
@@ -43,7 +40,7 @@ const bloquearListaNegra = require('../../middleware/bloquearListaNegra');
  *       500:
  *         description: Error interno del servidor.
  */
-// ✅ Aplica el middleware bloquearListaNegra solo al POST de favoritos
+// ✅ Middleware se aplica solo al POST de favoritos
 router.post('/favorito', bloquearListaNegra, paisController.agregarFavorito);
 
 /**
@@ -85,6 +82,29 @@ router.delete('/favorito/:nombre', paisController.eliminarFavorito);
 
 /**
  * @swagger
+ * /pais/ranking:
+ *   get:
+ *     summary: Retorna el ranking de países más buscados agrupado por región.
+ *     tags: [Gestión de Países]
+ *     responses:
+ *       200:
+ *         description: Ranking agrupado por región.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               additionalProperties:
+ *                 type: object
+ *                 additionalProperties:
+ *                   type: integer
+ *       500:
+ *         description: Error al obtener ranking.
+ */
+
+router.get('/ranking', paisController.obtenerRanking);
+
+/**
+ * @swagger
  * /pais/{nombre}:
  *   get:
  *     summary: Consulta información de un país por nombre.
@@ -107,6 +127,7 @@ router.delete('/favorito/:nombre', paisController.eliminarFavorito);
  *       500:
  *         description: Error interno del servidor.
  */
+// Ruta dinámica debe ir al final para no interceptar rutas como /ranking
 router.get('/:nombre', paisController.obtenerPais);
 
 module.exports = router;

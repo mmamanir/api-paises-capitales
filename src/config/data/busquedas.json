@@ -1,0 +1,62 @@
+[
+  {
+    "nombre": "Chile",
+    "region": "Americas",
+    "fecha": "2025-06-23T01:06:17.587Z"
+  },
+  {
+    "nombre": "Chile",
+    "region": "Americas",
+    "fecha": "2025-06-23T01:12:42.112Z"
+  },
+  {
+    "nombre": "Venezuela",
+    "region": "Americas",
+    "fecha": "2025-06-23T01:31:06.621Z"
+  },
+  {
+    "nombre": "Italy",
+    "region": "Europe",
+    "fecha": "2025-06-23T01:37:13.267Z"
+  },
+  {
+    "nombre": "Peru",
+    "region": "Americas",
+    "fecha": "2025-06-23T01:37:20.338Z"
+  },
+  {
+    "nombre": "Ghana",
+    "region": "Africa",
+    "fecha": "2025-06-23T01:37:30.528Z"
+  },
+  {
+    "nombre": "North Korea",
+    "region": "Asia",
+    "fecha": "2025-06-23T01:38:05.815Z"
+  },
+  {
+    "nombre": "United Kingdom",
+    "region": "Europe",
+    "fecha": "2025-06-23T01:38:24.057Z"
+  },
+  {
+    "nombre": "Argentina",
+    "region": "Americas",
+    "fecha": "2025-06-23T01:39:39.607Z"
+  },
+  {
+    "nombre": "Portugal",
+    "region": "Europe",
+    "fecha": "2025-06-23T01:40:46.343Z"
+  },
+  {
+    "nombre": "Colombia",
+    "region": "Americas",
+    "fecha": "2025-06-23T01:44:44.903Z"
+  },
+  {
+    "nombre": "Macau",
+    "region": "Asia",
+    "fecha": "2025-06-23T02:00:30.173Z"
+  }
+]

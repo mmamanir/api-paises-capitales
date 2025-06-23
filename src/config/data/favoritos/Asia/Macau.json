@@ -1,0 +1,11 @@
+{
+  "nombre": "Macau",
+  "capital": "Sin capital",
+  "region": "Asia",
+  "moneda": "MOP",
+  "idiomas": [
+    "Portuguese",
+    "Chinese"
+  ],
+  "poblacion": 649342
+}

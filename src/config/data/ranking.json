@@ -1,0 +1,21 @@
+{
+  "Americas": {
+    "Chile": 2,
+    "Venezuela": 1,
+    "Peru": 1,
+    "Argentina": 1,
+    "Colombia": 1
+  },
+  "Europe": {
+    "Italy": 1,
+    "United Kingdom": 1,
+    "Portugal": 1
+  },
+  "Africa": {
+    "Ghana": 1
+  },
+  "Asia": {
+    "North Korea": 1,
+    "Macau": 1
+  }
+}

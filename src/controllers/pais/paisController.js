@@ -7,8 +7,8 @@ const httpMessages = require('../../shared/messages/http');
 /**
  * @file Controlador para gestionar los endpoints relacionados con países.
  * Este archivo define las funciones que manejan las solicitudes HTTP relacionadas
- * con la consulta y gestión de países usando la API de REST Countries.
- *
+ * con la consulta de países, gestión de favoritos y control de errores.
+ * 
  * @module paisController
  */
 
@@ -39,50 +39,33 @@ const httpMessages = require('../../shared/messages/http');
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 nombre:
- *                   type: string
- *                 capital:
- *                   type: string
- *                 region:
- *                   type: string
- *                 moneda:
- *                   type: string
- *                 idiomas:
- *                   type: array
- *                   items:
- *                     type: string
- *                 poblacion:
- *                   type: integer
+ *               $ref: '#/components/schemas/Pais'
+ *       400:
+ *         description: Nombre de país inválido o vacío.
  *       404:
  *         description: País no encontrado.
  *       500:
  *         description: Error interno del servidor.
  */
 exports.obtenerPais = async (req, res) => {
-  const nombre = req.params.nombre;
+  const nombre = req.params.nombre?.trim();
 
-  // Caso 1: Validación de entrada
-  if (!nombre || nombre.trim() === '') {
+  if (!nombre) {
     return res.status(400).json({ message: 'El nombre del país es requerido' });
   }
 
   try {
     const pais = await paisService.obtenerPais(nombre);
-    return res.status(200).json(pais);
+    return res.status(200).json(pais.toJSON());
   } catch (error) {
-    // Caso 2: País no encontrado en la API externa
     if (error.message.includes('País no encontrado')) {
       return res.status(404).json({ message: 'País no encontrado' });
     }
 
-    // Caso 3: Error inesperado
     logger.error(`❌ Error inesperado en obtenerPais: ${error.message}`);
     return res.status(500).json({ message: `${httpMessages.INTERNAL_ERROR}: ${error.message}` });
   }
 };
-
 
 /**
  * @swagger
@@ -105,6 +88,10 @@ exports.obtenerPais = async (req, res) => {
  *     responses:
  *       201:
  *         description: País agregado exitosamente a favoritos.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pais'
  *       400:
  *         description: País inválido o ya existe en favoritos.
  *       403:
@@ -120,12 +107,11 @@ exports.agregarFavorito = async (req, res) => {
   }
 
   try {
-    const resultado = await favoritosService.agregarFavorito(pais.trim());
-    return res.status(201).json({ message: resultado });
+    const paisFavorito = await favoritosService.agregarFavorito(pais.trim());
+    return res.status(201).json(paisFavorito.toJSON());
   } catch (error) {
     logger.error(`❌ Error al agregar favorito: ${error.message}`);
-    const status = error.status || 500;
-    return res.status(status).json({ message: error.message });
+    return res.status(error.status || 500).json({ message: error.message });
   }
 };
 
@@ -146,6 +132,8 @@ exports.agregarFavorito = async (req, res) => {
  *                 type: array
  *                 items:
  *                   type: string
+ *       500:
+ *         description: Error al obtener favoritos.
  */
 exports.obtenerFavoritos = async (req, res) => {
   try {
@@ -179,14 +167,14 @@ exports.obtenerFavoritos = async (req, res) => {
  *         description: Error interno del servidor.
  */
 exports.eliminarFavorito = async (req, res) => {
-  const { nombre } = req.params;
+  const nombre = req.params.nombre?.trim();
 
-  if (!nombre || nombre.trim() === '') {
+  if (!nombre) {
     return res.status(400).json({ message: 'Debe especificar un país en la URL' });
   }
 
   try {
-    const eliminado = await favoritosService.eliminarFavorito(nombre.trim());
+    const eliminado = await favoritosService.eliminarFavorito(nombre);
     if (!eliminado) {
       return res.status(404).json({ message: 'País no se encuentra en favoritos' });
     }
@@ -196,3 +184,32 @@ exports.eliminarFavorito = async (req, res) => {
     return res.status(500).json({ message: httpMessages.INTERNAL_ERROR });
   }
 };
+
+/**
+ * @swagger
+ * /pais/ranking:
+ *   get:
+ *     summary: Obtiene el ranking de países más buscados agrupados por región.
+ *     tags: [Gestión de Países]
+ *     responses:
+ *       200:
+ *         description: Ranking por región.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               additionalProperties:
+ *                 type: object
+ *                 additionalProperties:
+ *                   type: integer
+ */
+exports.obtenerRanking = async (req, res) => {
+  try {
+    const ranking = await require('../../domain/repositories/pais/busquedaRepository').obtenerRanking();
+    return res.status(200).json(ranking);
+  } catch (error) {
+    logger.error(`❌ Error al obtener ranking: ${error.message}`);
+    return res.status(500).json({ message: httpMessages.INTERNAL_ERROR });
+  }
+};
+

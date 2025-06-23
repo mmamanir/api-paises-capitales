@@ -1,0 +1,10 @@
+{
+  "nombre": "Japan",
+  "capital": "Tokyo",
+  "region": "Asia",
+  "moneda": "JPY",
+  "idiomas": [
+    "Japanese"
+  ],
+  "poblacion": 125836021
+}
