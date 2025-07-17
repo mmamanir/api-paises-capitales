@@ -1,3 +1,39 @@
+# 🧱 API - Desafío 2: Países y Capitales – Inteligencia Geográfica
+
+## 📌 Descripción
+
+Esta API fue desarrollada como parte del **Desafío 2 – Países y Capitales: Inteligencia Geográfica**, en el marco de la **Capacitación Profesional en Node.js** organizada por el **Ministerio de Vivienda y Urbanismo (MINVU)**.
+
+Está construida sobre el arquetipo base de arquitectura limpia en Node.js (`arq-api-nodejs-227-ge`), el cual sigue principios de **Clean Architecture** y **Hexagonal Architecture**, e incluye buenas prácticas modernas de seguridad, modularidad y escalabilidad.
+
+---
+
+## 👥 Equipo de desarrollo del desafío
+
+- 📧 mmamani@minvu.cl  
+- 📧 smamanil@minvu.cl
+
+Arquitecto del arquetipo base:
+- 📧 eliasalmarza25@gmail.com
+
+---
+
+## 🎯 Objetivo del desafío
+
+Diseñar una API RESTful que permita:
+
+- Consultar información de países desde una API externa (REST Countries)
+- Gestionar una lista de países favoritos, agrupados por región
+- Registrar búsquedas realizadas
+- Aplicar validaciones con lista negra
+- Generar un ranking de países más buscados
+- Mantener persistencia mediante archivos JSON
+
+---
+
+## 📁 Este proyecto se basa en el arquetipo general descrito a continuación:
+
+
 # 🧱 Arquetipo API - Node.js (v22.15.0)
 
 ## 📌 Descripción
