@@ -30,57 +30,45 @@ const title = config.title_app;
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: `${title}`,
+    title: 'Desafío 2 – Países y Capitales: Inteligencia Geográfica',
     version: '1.0.0',
     description: `
 
-Esta arquitectura implementa una versión moderna y escalable de **Clean Architecture** combinada con los principios de **Hexagonal Architecture (Ports & Adapters)**, diseñada específicamente para aplicaciones backend en **Node.js** utilizando **Express 5**.
+Esta API forma parte del **Desafío 2 – Países y Capitales: Inteligencia Geográfica**, desarrollado durante la capacitación profesional en Node.js organizada por el Ministerio de Vivienda y Urbanismo.
+---
+
+📌 **Objetivo del desafío**  
+Diseñar una API que consulte datos de países a través de la REST Countries API, gestione una lista de favoritos agrupada por región, registre búsquedas realizadas, aplique seguridad mediante listas negras, y genere un ranking de uso.
+
 
 ---
 
-## 🎯 Descripción técnica
+🔧 **Funciones implementadas**  
+- Consulta de país por nombre ('GET /pais/{nombre}')
+- Agregado a favoritos con validación ('POST /pais/favorito')
+- Eliminación de favoritos ('DELETE /pais/favorito/{nombre}')
+- Listado agrupado de favoritos por región ('GET /pais/favoritos')
+- Ranking de países más consultados ('GET /pais/ranking')
+- Control por lista negra (middleware)
+- Logs estructurados de uso
 
-La estructura está completamente modularizada por **contextos funcionales**, facilitando la escalabilidad, mantenibilidad y separación de responsabilidades:
-
-- 🔌 Adaptadores de entrada: **routes/** y **controllers/**
-- 🧠 Lógica de negocio: **domain/services/** y **domain/models/**
-- 🔁 Puertos del dominio: **domain/repositories/**
-- 🧱 Adaptadores de salida: **infrastructure/external/**, **openai**, **sendgrid**
-- ⚙️ Configuración y utilidades compartidas en **config/** y **shared/**
-
----
-
-## 🚀 Características principales
-
-- ✅ Backend con Node.js v22.15.0 y Express 5
-- 🧱 Arquitectura limpia (Clean Architecture) + Hexagonal
-- 🛢️ Conectividad con **MySQL** o **SQL Server**
-- 📄 Documentación OpenAPI 3.0 interactiva con **Swagger UI**
-- 📦 Carga de archivos con **Multer**
-- ☁️ Integración con **Azure Blob Storage**
-- 📧 Envío de correos vía **SendGrid**
-- 🌐 Solicitudes HTTP con **Axios**
-- 🔒 Autenticación con **jsonwebtoken**
-- 🐳 Contenedores con **Docker** y despliegue con **Kubernetes**
-- 🛠️ Linting con **ESLint**
-- 📝 Logs estructurados con **Winston**
-- 🌍 Configuración por entorno con **dotenv**
-- 🔄 Soporte completo para **CORS**
-- 🗄️ Parsing de solicitudes con **body-parser**
-- 🤖 Integración con **OpenAI**
-- 📅 Tareas programadas con **node-cron**
-- 🕒 Manejo de zonas horarias con **moment-timezone**
-- 🛡️ Seguridad con **helmet** y **express-rate-limit**
-- 🧹 Sanitizado contra XSS con **express-xss-sanitizer**
-- 🔑 Utilidades de cifrado con **crypto**
 
 ---
 
-## 👤 Contacto
-- **Soporte Técnico**: [eliasalmarza25@gmail.com](mailto:eliasalmarza25@gmail.com)
-- [LinkedIn](https://www.linkedin.com/in/elias-almarza-kackschis/)
+🌐 **API externa utilizada:**  
+https://restcountries.com
+
+📁 **Persistencia local simulada:**  
+Archivos JSON por región y favoritos
+
+🛡️ **Seguridad:**  
+Lista negra configurable y validaciones por zona
 
 ---
+
+📅 **Fecha de entrega:** 16 de Julio de 2025  
+👤 **Desarrolladores: mmamani@minvu.cl, smamanil@minvu.cl
+🏢 **Institución:** Ministerio de Vivienda y Urbanismo
 
 ## ⚠️ Licencia
 **Licencia MIT**
@@ -119,7 +107,8 @@ La estructura está completamente modularizada por **contextos funcionales**, fa
  */
 const options = {
   swaggerDefinition,
-  apis: ['./src/controllers/*/*.js'], // Cambia según cómo tengas agrupado controllers
+  // apis: ['./src/controllers/*/*.js'], // Cambia según cómo tengas agrupado controllers
+  apis: ['./src/controllers/pais/paisController.js'] // Solo se incluye el controlador de Países para mostrar exclusivamente esa API en Swagger
 };
 
 /**
