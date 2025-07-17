@@ -14,6 +14,36 @@ const bloquearListaNegra = require('../../middleware/bloquearListaNegra');
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Pais:
+ *       type: object
+ *       properties:
+ *         nombre:
+ *           type: string
+ *           example: Chile
+ *         capital:
+ *           type: string
+ *           example: Santiago
+ *         region:
+ *           type: string
+ *           example: América del Sur
+ *         moneda:
+ *           type: string
+ *           example: Peso chileno
+ *         idiomas:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: [Español]
+ *         poblacion:
+ *           type: integer
+ *           example: 19000000
+ */
+
+
+/**
+ * @swagger
  * /pais/favorito:
  *   post:
  *     summary: Agrega un país a la lista de favoritos.
@@ -120,6 +150,10 @@ router.get('/ranking', paisController.obtenerRanking);
  *     responses:
  *       200:
  *         description: Información del país obtenida exitosamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pais'
  *       400:
  *         description: Nombre de país inválido o vacío.
  *       404:

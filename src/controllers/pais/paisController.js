@@ -14,6 +14,36 @@ const httpMessages = require('../../shared/messages/http');
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Pais:
+ *       type: object
+ *       properties:
+ *         nombre:
+ *           type: string
+ *           example: Chile
+ *         capital:
+ *           type: string
+ *           example: Santiago
+ *         region:
+ *           type: string
+ *           example: América del Sur
+ *         moneda:
+ *           type: string
+ *           example: Peso chileno
+ *         idiomas:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: [Español]
+ *         poblacion:
+ *           type: integer
+ *           example: 19000000
+ */
+
+
+/**
+ * @swagger
  * tags:
  *   - name: Gestión de Países
  *     description: Endpoints para consultar países, gestionar favoritos y validaciones regionales.
