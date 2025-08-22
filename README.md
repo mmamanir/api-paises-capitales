@@ -186,7 +186,9 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
 
 ## 📚 Documentación Swagger
 
-   La documentación interactiva de la API estará disponible en la siguiente URL: http://localhost:3000/api-docs
+- 🔹 **Entorno local (dev):** http://localhost:3000/api-docs  
+- 🔹 **Producción (Azure): https://api-paises-node-minvu-egd4c9gefqhwefbq.chilecentral-01.azurewebsites.net/api-docs/
+
 
    ---
 
