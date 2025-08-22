@@ -110,11 +110,16 @@ logger.info('🌐 Rutas de la API configuradas en /api');
  * El servidor escucha en el puerto y host configurados, y registra un mensaje
  * en el logger indicando que está corriendo.
  */
-app.listen(config.port, () => {
-    logger.info(`🌐 Servidor corriendo en el entorno ${config.modo_entorno_env} en el puerto ${config.port}`);
-    logger.info(`📚 Documentación de API disponible en http://${config.host}:${config.port}/api-docs`);
-});
+// --- INICIO: Bloque corregido para Azure ---
+const port = process.env.PORT || config.port || 3000;
+// En Azure el host debe ser 0.0.0.0
+const host = '0.0.0.0';
 
+app.listen(port, host, () => {
+  logger.info(`🌐 Servidor corriendo en el entorno ${config.modo_entorno_env} escuchando en ${host}:${port}`);
+  // En Azure no uses config.host para construir la URL local
+  logger.info(`📚 Swagger UI: /api-docs`);
+});
 /**
  * Exporta la aplicación para pruebas o configuraciones adicionales.
  * 
