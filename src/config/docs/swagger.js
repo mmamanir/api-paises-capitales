@@ -84,11 +84,11 @@ Lista negra configurable y validaciones por zona
     }
   },
   servers: [
-    {
-      url: `${hostDominio}${basePath}`,
-      description: `Servidor de ${env}`,
-    },
-  ],
+  {
+    url: basePath || '/',
+    description: `Servidor de ${env} (mismo host)`,
+  },
+],
   components: {
     securitySchemes: {
       bearerAuth: {
