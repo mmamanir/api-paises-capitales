@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# 👇 Necesario para azure/login con federación OIDC
+# Necesario para azure/login con federación OIDC
 permissions:
   id-token: write
   contents: read
@@ -25,15 +25,18 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci --no-audit --no-fund
+      # Instalación en modo producción (sin devDeps) para empaquetar con node_modules
+      - name: Install dependencies (prod)
+        run: npm ci --omit=dev --no-audit --no-fund
 
+      # Si no tienes build (TS/webpack), este paso no hace nada y no molesta
       - name: Build (if present)
         run: npm run build --if-present
 
-      - name: Archive app
+      # ¡NO excluir node_modules!
+      - name: Archive app (include node_modules)
         run: |
-          zip -r app.zip . -x ".git/*" ".github/*" "node_modules/*" "**/.env*" "**/*.md"
+          zip -r app.zip . -x ".git/*" ".github/*" "**/.env*" "**/*.md"
 
       - name: Azure Login (Managed Identity)
         uses: azure/login@v2
